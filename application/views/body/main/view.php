@@ -1,10 +1,10 @@
 <div  id='main' class="container">
   <div class="row">
 	<div class="span1">
-		<h4>Folder 1</h4>
-		<h4>Folder 2</h4>
-		<h4>Folder 3</h4>
-		<h4>Folder 4</h4>
+		<h4>Music</h4>
+		<h4>Shows</h4>
+		<h4>Training</h4>
+		<h4>Family</h4>
 	</div>      	
 	<div class="span2">
 		<div   id='categories' class="accordion" >
