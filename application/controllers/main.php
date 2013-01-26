@@ -48,19 +48,7 @@ class Main extends Base_Controller {
 
 	public function validate(){
 		
-		sleep(0);	
-		
-		if( $this->input->post('username') == 'pongo'){
-			
-			$session_data = array('user_id' => 1 );						
-			
-			$this->session->set_userdata($session_data);			
-			
-			redirect('/main/main_body/');
-			
-		}else if($this->input->post('username') == 'jamesming' 
-				|| $this->input->post('username') == 'jamesming@gmail.com'
-				){
+		if($this->input->post('username') == 'jamesming'){
 			
 			$session_data = array('user_id' => 2 );						
 			
@@ -79,22 +67,6 @@ class Main extends Base_Controller {
 		
 	}
 	
-	public function testvideo(){
-		
-		$this->_data->body = "body/main/testvideo";
-		$this->_data->nav_selected = "";
-		$this->load->view('index', $this->_data);
-		
-	}
-	
-	public function test(){
-
-		$this->_data->body = "body/test/view";
-		$this->_data->nav_selected = "";		
-		$this->load->view('index', $this->_data);
-		
-		
-	}
 	
 	
 	public function testPostToIframe(){

@@ -9,8 +9,6 @@ class Base_Controller extends CI_Controller
 		parent::__construct();
 		
 		$this->assets_model = new Models_Db_Assets_Model;
-		
-
 
 		$this->_data = new stdClass;
 		
@@ -49,12 +47,12 @@ class Base_Controller extends CI_Controller
 		$fields_array = array(
 		                      'name' => array(
 		                                               'type' => 'varchar(255)'
-		                                    ),
+		                                    )/*,
 		                                    
 		                                    
 		                      'category_id' => array(
 		                                               'type' => 'int(11)'
-		                                    )/*,,
+		                                    ),,
 		                      'numberOfColors' => array(
 		                                               'type' => 'int(11)'
 		                                    )			                                    

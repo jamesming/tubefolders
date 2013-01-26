@@ -347,18 +347,11 @@ _.extend(core, {
 			,url = window.base_url  + 'index.php/ajax/getAll';
 		
 		$('#json').load(url, function(){
-			
-//			console.log(JSON.stringify(core.categories));
-			
 			that.setPropertiesMain();
-
 			that.create.init();
 			that.bindElements.init();
 			that.misc.youtubeAPI();
-			
 			$('body').css({visibility:'visible'})
-			
-			// that.create.jcrop.init()
 		});	
 		
 	}
@@ -366,8 +359,6 @@ _.extend(core, {
 	,setPropertiesMain: function(){
 		
 		this.user_id = core.categories[0].user_id;
-		
-		this.myPlayer = _V_("my_video_1");
 		
 		this.submissionModeAssets = 'insert';  // || edit
 		this.category_idx = 0; // var category_id = core.categories[core.category_idx].category_id
@@ -446,8 +437,6 @@ _.extend(core, {
 			
 					var tpl = core.category_li_tpl;
 					
-					// li_obj.asset_name = li_obj.asset_name.substring(0, 25);
-
 					tpl  = tpl.replace(/{{asset_name}}/g, li_obj.asset_name);
 					tpl  = tpl.replace(/{{asset_id}}/g, li_obj.asset_id);
 					tpl  = tpl.replace(/{{youtube_id}}/g, li_obj.youtube_id);
@@ -504,8 +493,6 @@ _.extend(core, {
 				
 				var tpl = core.asset_tpl;
 				
-				// asset_name = asset_name.substring(0, 25);
-	
 				tpl  = tpl.replace(/{{asset_name}}/g, asset_name);
 				tpl  = tpl.replace(/{{asset_id}}/g, asset_id);
 				tpl  = tpl.replace(/{{youtube_url}}/g, youtube_url);
@@ -516,8 +503,6 @@ _.extend(core, {
 				}else{
 					tpl  = tpl.replace(/{{image_thumb}}/g, youtube_thumb);
 				};
-				
-				
 				
 				tpl  = tpl.replace(/{{youtube_id}}/g, youtube_id);
 				tpl  = tpl.replace(/{{category_id}}/g, category_id);
@@ -543,18 +528,6 @@ _.extend(core, {
 					'right':($('body').width() /2 ) - 560
 				})
 			
-		}
-		
-		,jcrop:{
-			 init:function(){
-				this.bind();
-				
-			}
-			,bind:function(){
-				$('#edit').click(function(event) {
-					$('#jcropContainer').toggle();
-				});	
-			}
 		}
 		
 	}
@@ -674,8 +647,6 @@ _.extend(core, {
 
 						$('#zoom .submit_category_form').click(function(event) {
 							
-							
-							
 								var categoryObj = {
 									  category_name: $('#zoom .category_name').val()
 									 ,order: core.categories.length + 1
@@ -703,7 +674,6 @@ _.extend(core, {
 												delete categoryObj.order;
 												
 												core.categories.push(categoryObj);	
-												
 														
 												$('body').click();
 				
@@ -790,8 +760,6 @@ _.extend(core, {
 									
 								    var start_pos = ui.item.index();
 								    ui.item.data('start_pos', start_pos);
-								    
-
 								    
 								}
 								,update: function(event, ui) {
@@ -946,17 +914,10 @@ _.extend(core, {
 				}						
 				
 				,playAsset: function(){
-					
-					
-					if( core.user_id == 1 ){
-						$('.play').live('click', function(event) {
-						 	core.misc.playVideo( $(this) );
-						});								
-					}else{
-						$('.play').live('click', function(event) {
-						 	core.misc.playYouTube( $(this) );
-						});							
-					};
+
+					$('.play').live('click', function(event) {
+					 	core.misc.playYouTube( $(this) );
+					});							
 					
 				}			
 				
@@ -1045,8 +1006,6 @@ _.extend(core, {
 												
 												core.order.model.assets.setGroup();
 												
-												
-												
 												core.categories[category_idx].assets.push(assetObj);
 												
 												$('.accordion-group[category_idx=' + core.category_idx + '] li[asset_id=' + asset_id + ']').appendTo(  $('.accordion-group[category_idx=' + category_idx + '] ul') );
@@ -1055,10 +1014,8 @@ _.extend(core, {
 												
 //												$('.accordion-group[category_idx=' + category_idx + '] .accordion-toggle').click();
 												
-												
 											}
 									);	
-									
 							}
 						});
 						
@@ -1130,96 +1087,53 @@ _.extend(core, {
 							);				 				
 			 				
 			 			};
-			 			
-
 						
 					}			
 					
 					,afterUpdate: {
 						
-						 createNewElements: function(assetObj){
-						 	
-						 	
-							if( core.user_id == 1){
+						createNewElements: function(assetObj){
 								
-									core.create.asset.add(
-										 assetObj.asset_name
-										,assetObj.asset_id
-										,assetObj.asset_youtube_url = ''
-										,youtube_thumb = ''
-										,assetObj.youtube_id = ''
-										,core.category_idx
-									);	
-									
-											core.create.category_li.add(
-												 core.category_idx
-												,{
-													 asset_name:assetObj.asset_name
-													,asset_id:assetObj.asset_id
-												 }
-											);							
-											
-											if( typeof(core.categories[core.category_idx].assets) === "undefined"){	
-												core.categories[core.category_idx].assets = [];
-											};								
-											
-											core.categories[core.category_idx].assets.push(assetObj);
-											
-											core.misc.showHideButtonBasedOnNumofAssets();
-											
-											var $el = $('.edit[asset_id=' + assetObj.asset_id + ']');
-											
-											core.bindElements.model.assets.editAsset.fancyZoomThis( $el );																		
-								
-							}else{
-								
-								core.misc.getYouTubeTitle(assetObj.youtube_id, function(youtubeObj){
-								
-									youtubeObj.data.title = youtubeObj.data.title.substring(0, 15);
-									
-									assetObj.asset_name = youtubeObj.data.title;
-								
-									core.create.asset.add(
-										 assetObj.asset_name
-										,assetObj.asset_id
-										,assetObj.asset_youtube_url
-										,youtube_thumb = "http://img.youtube.com/vi/" +  assetObj.youtube_id + "/0.jpg"
-										,assetObj.youtube_id
-										,core.category_idx
-									);
-		
-									
-									assetObj.youtube_thumb = "http://img.youtube.com/vi/" +  assetObj.youtube_id + "/0.jpg";
-										
-											core.create.category_li.add(
-												 core.category_idx
-												,{
-													 asset_name:assetObj.asset_name
-													,asset_id:assetObj.asset_id
-												 }
-											);							
-											
-											if( typeof(core.categories[core.category_idx].assets) === "undefined"){	
-												core.categories[core.category_idx].assets = [];
-											};								
-											
-											core.categories[core.category_idx].assets.push(assetObj);
-											
-											core.misc.showHideButtonBasedOnNumofAssets();
-											
-											var $el = $('.edit[asset_id=' + assetObj.asset_id + ']');
-											
-											core.bindElements.model.assets.editAsset.fancyZoomThis( $el );												
-									
-										
-										
-								});
-								
-							}
+							core.misc.getYouTubeTitle(assetObj.youtube_id, function(youtubeObj){
 							
+								youtubeObj.data.title = youtubeObj.data.title.substring(0, 15);
+								
+								assetObj.asset_name = youtubeObj.data.title;
 							
-						
-							
+								core.create.asset.add(
+									 assetObj.asset_name
+									,assetObj.asset_id
+									,assetObj.asset_youtube_url
+									,youtube_thumb = "http://img.youtube.com/vi/" +  assetObj.youtube_id + "/0.jpg"
+									,assetObj.youtube_id
+									,core.category_idx
+								);
+	
+								
+								assetObj.youtube_thumb = "http://img.youtube.com/vi/" +  assetObj.youtube_id + "/0.jpg";
+									
+										core.create.category_li.add(
+											 core.category_idx
+											,{
+												 asset_name:assetObj.asset_name
+												,asset_id:assetObj.asset_id
+											 }
+										);							
+										
+										if( typeof(core.categories[core.category_idx].assets) === "undefined"){	
+											core.categories[core.category_idx].assets = [];
+										};								
+										
+										core.categories[core.category_idx].assets.push(assetObj);
+										
+										core.misc.showHideButtonBasedOnNumofAssets();
+										
+										var $el = $('.edit[asset_id=' + assetObj.asset_id + ']');
+										
+										core.bindElements.model.assets.editAsset.fancyZoomThis( $el );												
+									
+							});
+								
 						}						
 					
 						 ,updateExistingElements: function(assetObj){	
@@ -1230,24 +1144,6 @@ _.extend(core, {
 																					if( item.asset_id === asset_id) return true;
 																			});	
 																			
-							if( core.user_id == 1){
-								
-									$('.title[asset_id=' + assetObj['asset_id'] + ']')
-									.html(assetObj.asset_name);
-									
-									$('.category-ul li[asset_id=' + assetObj['asset_id'] + ']').html(assetObj.asset_name);
-									
-									core.categories[core.category_idx].assets[ idx_assets_array ].asset_name = assetObj.asset_name;
-																
-									$('#thumb-collection li[asset_id=' + assetObj['asset_id'] + '] div.play')
-									.css({
-											 'background':'url(' + window.base_url + 'uploads/'+ assetObj['asset_id'] +'/thumb/image.jpg?v=' + Math.random() + ') no-repeat'
-											,'background-position':'0px -45px'
-											,'background-size':'282px'
-									});
-									
-							}else{
-							
 								core.categories[core.category_idx].assets[ idx_assets_array ].youtube_thumb = "http://img.youtube.com/vi/" +  assetObj.youtube_id + "/0.jpg";
 			
 								$('.title[asset_id=' + assetObj['asset_id'] + ']')
@@ -1291,7 +1187,7 @@ _.extend(core, {
 										,'background-size':'282px'
 								});
 								
-							}
+
 							
 							core.submissionModeAssets = 'insert';	
 							
@@ -1315,24 +1211,13 @@ _.extend(core, {
 				
 				$('#thumb-collection').show();
 				
-				if( core.user_id == 1 ){
-					
-					$('#video_container').hide();
-					core.myPlayer.pause();
-												
-				}else{
-					
-					$('#youtube_container').hide();
-								
-				};
+				$('#youtube_container').hide();
 
-				
 				$('#thumb-collection-ul').empty();			
 				
 				core.category_idx  = $(this).attr('idx');
 				
 				core.create.asset.init(core.category_idx);
-				
 				
 				$('#thumb-collection h2').html(core.categories[core.category_idx].category_name);
 				
@@ -1342,7 +1227,6 @@ _.extend(core, {
 				
 				core.bindElements.model.assets.editAsset.init();
 				
-				
 				$('#thumb-collection-ul .play[asset_id=' + core.asset_id + ']').css({border:'5px solid #5888D5'});
 				
 			});		
@@ -1350,15 +1234,7 @@ _.extend(core, {
 			
 			$('#categories li').click(function(event) {	
 					
-					if( core.user_id == 1 ){
-						
-						 	core.misc.playVideo( $(this) );
-								
-					}else{
-						
-						 	core.misc.playYouTube( $(this) );
-									
-					};
+				core.misc.playYouTube( $(this) );
 
 			});	
 			
@@ -1420,32 +1296,7 @@ _.extend(core, {
 //				};		
 				
 		}
-		
-		,playVideo: function($this){  // DEPRECIATED
-		
-				var	 asset_id = $this.attr('asset_id')
-					,category_id = $this.attr('category_id')
-					,idx_categories_array = core.findIndexInArrayOfObjects( 
-										 core.categories
-										,function( item ){
-											if( item.category_id === category_id) return true;
-										});	
-										
-				$('.category-ul > li').css({background:'white'});	
-				$('li[asset_id=' + asset_id + '] ').css({background:'red'});										
-				
-				
-				$('#thumb-collection').hide();
-				$('#video_container').show();
-				
-				var video_src = window.base_url + 'uploads/'+ $this.attr('asset_id') +'/video/video.mp4?v=' + Math.random();
-				
-				core.myPlayer.src(video_src);				
-				
-				
-										
-			
-		}
+
 		,playYouTube: function($this){
 			
 				var	 asset_id = $this.attr('asset_id')
