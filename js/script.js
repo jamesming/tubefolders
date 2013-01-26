@@ -614,10 +614,7 @@ _.extend(core, {
 			this.model.assets.init();
 			
 			this.leftControls();
-			
-			this.upload.thumb();
-			this.upload.video();
-			this.upload.form();
+
 			
 
 		}
@@ -1194,7 +1191,6 @@ _.extend(core, {
 						}
 
 					}
-					
 				}
 				
 			}
@@ -1239,48 +1235,6 @@ _.extend(core, {
 			});	
 			
 		}
-		
-		,upload: {
-			
-			 thumb: function(){	
-			 	
-			 	$('#zoom_content .thumb_img').live('click', function(event) {
-			 		
-			 		$(this).attr('src', 'img/loading.gif');
-			 		
-			 		$('#zoom_content .filename').val('');
-			 		$('#zoom_content input[name=target_name]').val('image.jpg');
-			 		$('#zoom_content input[name=target_folder]').val('thumb');
-			 		$('#zoom_content .filename').click();
-			 	});	
-			 		
-			}
-			
-			,video: function(){
-				
-				$('#zoom_content .video_uplr').live('click', function(event) {
-					
-					$('#zoom_content input[name=target_name]').val('video.mp4');
-					$('#zoom_content input[name=target_folder]').val('video');
-					$('#zoom_content .video_input_field').val('loading...')
-					$('#zoom_content .filename').click();
-				});	
-				
-			}
-			
-			,form: function(){
-				
-				$('#zoom_content .filename').live('change', function(event) {
-					$('#zoom_content input[name=asset_id]').val(core.updateThis.asset_id);
-					$('#zoom_content form.uploadVideo').submit();
-					
-				});	
-				
-			}
-			
-		}
-
-
 	}
 	
 	,misc: {
