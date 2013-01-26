@@ -47,12 +47,19 @@ class Base_Controller extends CI_Controller
 		$fields_array = array(
 		                      'name' => array(
 		                                               'type' => 'varchar(255)'
-		                                    )/*,
+		                                    ),
 		                                    
 		                                    
 		                      'category_id' => array(
 		                                               'type' => 'int(11)'
-		                                    ),,
+		                                    ),
+		                                    
+		                      'group_id' => array(
+		                                               'type' => 'int(11)'
+		                                    )		                                    
+		                                    
+		                                    
+		                                    /*,,
 		                      'numberOfColors' => array(
 		                                               'type' => 'int(11)'
 		                                    )			                                    
