@@ -120,16 +120,13 @@ class Ajax extends CI_Controller {
  	}
  	
  	
- 	public function moveCategoryIntoGroup(){
+ 	public function removeCategoryFromGroup(){
  		
- 		$post_array = $this->input->post(); 
+ 		echo $this->groups_model->removeCategoryFromGroup( $this->input->post());
  		
- 		$this->groups_model->insertCategoryIntoGroup($post_array);		
- 		
- 		$this->groups_model->removeCategoryFromGroup($post_array);
  	}
  	
- 	public function copyCategoryIntoGroup(){
+ 	public function insertCategoryIntoGroup(){
  		
  		echo $this->groups_model->insertCategoryIntoGroup($this->input->post());		
  		

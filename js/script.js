@@ -343,6 +343,7 @@ _.extend(core, {
 	
 	 start: function(){
 	 	
+	 	this.select_group_id = 3;
 		this.loadCategories(3);  
 		
 	}
@@ -367,6 +368,7 @@ _.extend(core, {
 		this.submissionModeAssets = 'insert';  // || edit
 		this.category_idx = 0; // var category_id = core.categories[core.category_idx].category_id
 		this.updateThis = {asset_id:0};  // core.updateThis.asset_id
+		
 		
 		// var youtube_thumb = core.categories[core.category_idx].assets[ {{ index }} ].youtube_thumb
 		// var asset_id = core.categories[core.category_idx].assets[ {{ index }} ].asset_id
@@ -642,6 +644,8 @@ _.extend(core, {
 			 		
 			 		$('.groups').click(function(event) {
 			 			
+			 			core.select_group_id = $(this).attr('group_id');
+			 			
 			 			$('#categories, #thumb-collection-ul').html('');
 			 			
 			 			core.categories = [];
@@ -664,14 +668,12 @@ _.extend(core, {
 							tolerance: "pointer",
 							drop: function( event, ui ) {
 								
-								console.log('copy');
-								
-								postObj = {
+								var postObj = {
 									 group_id: $(this).parent().parent().attr('group_id')
 									,category_id: ui.draggable.attr('category_id')
 								};
 								
-								$.post(	window.base_url  + 'index.php/ajax/copyCategoryIntoGroup',
+								$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
 										postObj,
 										function( data) {
 											ui.draggable.remove();
@@ -690,7 +692,32 @@ _.extend(core, {
 							tolerance: "pointer",
 							drop: function( event, ui ) {
 								
-								console.log('move');
+								var postObj = {
+									 group_id: $(this).parent().parent().attr('group_id')
+									,category_id: ui.draggable.attr('category_id')
+								};								
+								
+								$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
+										postObj,
+										function( data) {
+											ui.draggable.remove();
+										}
+								);
+								
+								postObj = {
+									 group_id: core.select_group_id
+									,category_id: ui.draggable.attr('category_id')
+								};	
+								
+								$.post(	window.base_url  + 'index.php/ajax/removeCategoryFromGroup',
+										postObj,
+										function( data) {
+											console.log(data);
+											ui.draggable.remove();
+										}
+								);																								
+								
+								
 							}
 						});
 						

@@ -52,7 +52,7 @@ class Models_Db_Groups_Model extends Database {
 	
 	
 	public function removeCategoryFromGroup($post_array){
-		 delete_from_table(
+		 return $this->delete_from_table(
 		 	  $table = 'groups_categories	'
 		 	, $where_array = array(
 				 'category_id' => $post_array['category_id']
