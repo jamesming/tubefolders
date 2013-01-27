@@ -18,38 +18,6 @@ class Ajax extends CI_Controller {
 	 
 	}
 
-	public function getAllCategoriesAndAssets(){  // DEPRECIATED
-		
-		
-		$categories = $this->assets_model->getAllCategoriesAndAssets();
-		
-		$count1 = 0;
-		
-		echo "<script>core.categories = [";
-		
-		foreach( $categories  as  $name => $category){
-			if($count1!=0) echo ",";
-			echo "{";
-			echo "name:'".$name."'";
-			echo ",assets:[";
-			$count2=0;
-			foreach( $category  as  $key => $asset){
-				if($count2!=0) echo ",";
-				echo "{name:'".$asset['asset_name']."'";
-				echo ",asset_id:'".$asset['asset_id']."'";
-				echo ",image_url:'http://lorempixel.com/280/159/city/".$count2."'";
-				echo "}";
-				$count2++;
-				$category_id = $asset['category_id'];
-			}
-			echo "], category_id:".$category_id;
-			echo "}";
-			$count1++;
-		}
-		
-		echo "];</script>";
-		
- 	}
  	
  	public function insertAsset(){
  		

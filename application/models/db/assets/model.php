@@ -8,7 +8,8 @@ class Models_Db_Assets_Model extends Database {
 		$this->upload = new Models_Up_Assets_Model;
 		
 		$join_array = array(
-			'assets' => 'assets.category_id = categories.id'
+			 'assets' => 'assets.category_id = categories.id'
+			,'groups_categories' => 'categories.id = groups_categories.category_id'
 		);	
 											
 		
@@ -25,12 +26,12 @@ class Models_Db_Assets_Model extends Database {
 						, assets.duration as duration
 						, assets.name as asset_name '   
 					,$where_array = array(
-						'user_id =' => (  $this->session->userdata['user_id'] == 1 ? 1 : 2 ) 
+						'groups_categories.group_id' => 4
 					)
 					,$use_order = TRUE
 					,$order_field = 'categories.order asc, assets.order asc'
 					,$order_direction = ''
-					,$limit = 15
+					,$limit = -1
 					,$use_join = TRUE
 					,$join_array
 					);

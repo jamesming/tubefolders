@@ -633,11 +633,17 @@ _.extend(core, {
 			 groups:{
 			 	init: function(){
 			 		this.addToGroup();
+			 		this.loadCategories()
 			 	}
-			 	
+			 	,loadCategories: function(){
+			 		$('.groups').click(function(event) {
+			 			$('#categories').empty();		
+			 			$('#thumb-collection-ul').empty();		
+			 		});	
+			 	}
 				,addToGroup: function(){
 					
-					
+						// COPY
 						$('.groups .copy')
 						.droppable({
 							accept: ".accordion-group",
@@ -646,27 +652,24 @@ _.extend(core, {
 							drop: function( event, ui ) {
 								
 								console.log('copy');
-								return;
-								
 								
 								postObj = {
-									 group_id: $(this).attr('group_id')
+									 group_id: $(this).parent().parent().attr('group_id')
 									,category_id: ui.draggable.attr('category_id')
 								};
 								
 								$.post(	window.base_url  + 'index.php/ajax/copyCategoryIntoGroup',
 										postObj,
 										function( data) {
-											console.log(data);
+											ui.draggable.remove();
 										}
 								);									
 								
-								if (confirm('Is this a move?')) {  // MOVE
-								} else {  // COPY
-								}
+
 							}
 						});
 						
+						// MOVE
 						$('.groups .move')
 						.droppable({
 							accept: ".accordion-group",

@@ -7,6 +7,7 @@
 					height: 29px;
 					position:relative;
 					clear:both;
+					cursor:pointer;
 				}
 				.groups > div{
 					position:absolute;	
@@ -26,6 +27,13 @@
 
 				
 			</style>
+			<h4   class='groups '  group_id='4' >
+				<div>Pop</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>
+				</div>					
+			</h4>				
 			<h4   class='groups '  group_id='1' >
 				<div>80s</div>
 				<div>
@@ -47,13 +55,7 @@
 					<div  class='move ' ></div>					
 				</div>
 			</h4>
-			<h4   class='groups '  group_id='4' >
-				<div>Pop</div>
-				<div>
-					<div  class='copy ' ></div>
-					<div  class='move ' ></div>
-				</div>					
-			</h4>			
+		
 	</div>      	
 	<div class="span2">
 		<div   id='categories' class="accordion" >
