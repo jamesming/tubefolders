@@ -345,6 +345,7 @@ _.extend(core, {
 	 	
 	 	this.select_group_id = 3;
 		this.loadCategories(3);  
+		this.misc.youtubeAPI();
 		
 	}
 	
@@ -356,7 +357,6 @@ _.extend(core, {
 			that.setPropertiesMain();
 			that.create.init();
 			that.bindElements.init();
-			that.misc.youtubeAPI();
 			$('body').css({visibility:'visible'})
 		});	
 	}
@@ -609,10 +609,10 @@ _.extend(core, {
 		 	
 		 	this.windowResize();
 		 	
-		 	if(typeof this.doOnce=="undefined"){this.doOnce = false;};
+		 	if(typeof this.doOnceGroupInit=="undefined"){this.doOnceGroupInit = false;};
 		 	
-		 	if( this.doOnce == false ){
-		 		this.doOnce = true;
+		 	if( this.doOnceGroupInit == false ){
+		 		this.doOnceGroupInit = true;
 		 		this.model.groups.init();
 		 	};
 			
