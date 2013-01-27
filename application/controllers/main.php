@@ -42,7 +42,7 @@ class Main extends Base_Controller {
 
 	public function validate(){
 		
-		if($this->input->post('username') == 'jamesming'){
+		if($this->input->post('username') == 'jamesming@gmail.com'){
 			
 			$session_data = array('user_id' => 2 );						
 			

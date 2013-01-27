@@ -1,10 +1,59 @@
 <div  id='main' class="container">
   <div class="row">
 	<div class="span1">
-			<h4   class='groups '   group_id='14' >80s</h4>
-			<h4   class='groups '  group_id='34' >Rock</h4>
-			<h4   class='groups '  group_id='54' >Classics</h4>
-			<h4   class='groups '  group_id='63' >Broadway</h4>			
+			<style>
+				.groups{
+					width: 83px;
+					height: 29px;
+					position:relative;
+					clear:both;
+				}
+				.groups > div{
+					position:absolute;	
+				}				
+				.groups > div >div{
+					width: 39px;
+					height: 27px;
+					position:relative;
+					float:left !important;
+				}
+				.groups .move{
+					border: 1px solid red;
+				}
+				.groups .copy{
+					border: 1px solid blue;
+				}
+
+				
+			</style>
+			<h4   class='groups '  group_id='1' >
+				<div>80s</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>
+				</div>
+				</h4>
+			<h4   class='groups '  group_id='2' >
+				<div>Rock</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>
+				</div>
+			</h4>
+			<h4   class='groups '  group_id='3' >
+				<div>Unsorted</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>					
+				</div>
+			</h4>
+			<h4   class='groups '  group_id='4' >
+				<div>Pop</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>
+				</div>					
+			</h4>			
 	</div>      	
 	<div class="span2">
 		<div   id='categories' class="accordion" >

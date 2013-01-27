@@ -610,6 +610,7 @@ _.extend(core, {
 		 init: function(){
 		 	
 		 	this.windowResize();
+			this.model.groups.init();
 			this.model.categories.init();
 			this.model.assets.init();
 			
@@ -629,7 +630,58 @@ _.extend(core, {
 		
 		,model:{
 			
-			 categories:{
+			 groups:{
+			 	init: function(){
+			 		this.addToGroup();
+			 	}
+			 	
+				,addToGroup: function(){
+					
+					
+						$('.groups .copy')
+						.droppable({
+							accept: ".accordion-group",
+							hoverClass: "ui-state-highlight",
+							tolerance: "pointer",
+							drop: function( event, ui ) {
+								
+								console.log('copy');
+								return;
+								
+								
+								postObj = {
+									 group_id: $(this).attr('group_id')
+									,category_id: ui.draggable.attr('category_id')
+								};
+								
+								$.post(	window.base_url  + 'index.php/ajax/copyCategoryIntoGroup',
+										postObj,
+										function( data) {
+											console.log(data);
+										}
+								);									
+								
+								if (confirm('Is this a move?')) {  // MOVE
+								} else {  // COPY
+								}
+							}
+						});
+						
+						$('.groups .move')
+						.droppable({
+							accept: ".accordion-group",
+							hoverClass: "ui-state-highlight",
+							tolerance: "pointer",
+							drop: function( event, ui ) {
+								
+								console.log('move');
+							}
+						});
+						
+				}	
+			}
+			
+			,categories:{
 			
 				init: function(){	
 					this.insertNewCategory();
@@ -794,7 +846,6 @@ _.extend(core, {
 					this.playAsset();
 					this.dragAsset();
 					this.formSubmission.init();
-					this.addToGroup();
 					
 				}
 				
@@ -1192,47 +1243,6 @@ _.extend(core, {
 						}
 
 					}
-				}
-				
-				,addToGroup: function(){
-						$('.groups')
-						.droppable({
-							accept: ".accordion-group",
-							hoverClass: "ui-state-highlight",
-							tolerance: "pointer",
-							drop: function( event, ui ) {
-								
-								postObj = {
-									 group_id: $(this).attr('group_id')
-									,category_id: ui.draggable.attr('category_id')
-								};
-								
-								$.post(	window.base_url  + 'index.php/ajax/copyCategoryIntoGroup',
-										postObj,
-										function( data) {
-											
-											console.log(data);
-											
-										}
-								);									
-								
-								return;
-								
-								
-								if (confirm('Is this a move?')) {  // MOVE
-
-
-
-
-								} else {  // COPY
-								    
-								    
-								    
-								    
-								    
-								}
-							}
-						});
 				}
 				
 			}
