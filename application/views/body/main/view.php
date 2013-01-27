@@ -1,10 +1,10 @@
 <div  id='main' class="container">
   <div class="row">
 	<div class="span1">
-		<h4>Music V</h4>
-		<h4>Shows</h4>
-		<h4>Training</h4>
-		<h4>Family</h4>
+			<h4   class='groups '   group_id='14' >80s</h4>
+			<h4   class='groups '  group_id='34' >Rock</h4>
+			<h4   class='groups '  group_id='54' >Classics</h4>
+			<h4   class='groups '  group_id='63' >Broadway</h4>			
 	</div>      	
 	<div class="span2">
 		<div   id='categories' class="accordion" >

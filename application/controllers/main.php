@@ -27,17 +27,13 @@ class Main extends Base_Controller {
 	
 	public function main_body(){
 		
-		
 		if( $this->_data->loggedIn == false){
-			
 			redirect('/main/index');
 		};
 		
 		$this->_data->body = "body/main/view";
 		$this->_data->hidden = "hidden/view";		
  		$this->_data->youtube = "hidden/youtube/view";
-		
-
 		
 		$this->load->view('index', $this->_data);			
 		

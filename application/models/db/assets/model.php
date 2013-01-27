@@ -30,7 +30,7 @@ class Models_Db_Assets_Model extends Database {
 					,$use_order = TRUE
 					,$order_field = 'categories.order asc, assets.order asc'
 					,$order_direction = ''
-					,$limit = -1
+					,$limit = 15
 					,$use_join = TRUE
 					,$join_array
 					);

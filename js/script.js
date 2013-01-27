@@ -1195,7 +1195,17 @@ _.extend(core, {
 				}
 				
 				,addToGroup: function(){
-					
+						$('.groups')
+						.droppable({
+							accept: ".accordion-group",
+							hoverClass: "ui-state-highlight",
+							tolerance: "pointer",
+							drop: function( event, ui ) {
+								console.log($(this).attr('group_id'));
+								console.log(ui.draggable.attr('category_id'));
+								
+							}
+						});
 				}
 				
 			}
