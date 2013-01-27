@@ -343,8 +343,13 @@ _.extend(core, {
 	
 	 start: function(){
 	 	
+		this.loadCategories(3);  
+		
+	}
+	
+	,loadCategories: function(group_id){
 		var  that = this
-			,url = window.base_url  + 'index.php/ajax/getAll';
+			,url = window.base_url  + 'index.php/ajax/getAll?group_id='+group_id;
 		
 		$('#json').load(url, function(){
 			that.setPropertiesMain();
@@ -353,7 +358,6 @@ _.extend(core, {
 			that.misc.youtubeAPI();
 			$('body').css({visibility:'visible'})
 		});	
-		
 	}
 
 	,setPropertiesMain: function(){
@@ -374,7 +378,7 @@ _.extend(core, {
 		
 		 init: function(){
 			this.category.init();
-			this.asset.init(0);
+			//this.asset.init(0);
 			this.setFixedRightBody()
 		}
 		
@@ -385,11 +389,8 @@ _.extend(core, {
 				var count = 0; 
 				
 				for(var idx in core.categories){
-					
 					this.add(core.categories[idx].category_id, core.categories[idx].category_name, count);
-					
 					if( typeof(core.categories[idx].assets) !== "undefined"){
-						
 						for(var index in core.categories[idx].assets){
 							core.create.category_li.add(
 								idx, 
@@ -400,12 +401,8 @@ _.extend(core, {
 					count++;
 				};
 				
-				
 				$('#thumb-collection h2').html(core.categories[0].category_name);
-				
 				$('#thumb-collection .editCategoryTitle').attr({'category_id':core.categories[0].category_id,'category_idx':0});
-
-				
 			}
 			
 			,add: function(category_id, category_name, count){
@@ -422,7 +419,6 @@ _.extend(core, {
 					tpl  = tpl.replace(/{{category_id}}/g, category_id);
 					
 					$('#categories').append(tpl);
-	
 			}
 			
 		}
@@ -610,7 +606,14 @@ _.extend(core, {
 		 init: function(){
 		 	
 		 	this.windowResize();
-			this.model.groups.init();
+		 	
+		 	if(typeof this.doOnce=="undefined"){this.doOnce = false;};
+		 	
+		 	if( this.doOnce == false ){
+		 		this.doOnce = true;
+		 		this.model.groups.init();
+		 	};
+			
 			this.model.categories.init();
 			this.model.assets.init();
 			
@@ -636,9 +639,19 @@ _.extend(core, {
 			 		this.loadCategories()
 			 	}
 			 	,loadCategories: function(){
+			 		
 			 		$('.groups').click(function(event) {
-			 			$('#categories').empty();		
-			 			$('#thumb-collection-ul').empty();		
+			 			
+			 			$('#categories, #thumb-collection-ul').html('');
+			 			
+			 			core.categories = [];
+			 			
+			 			var $that = $(this);
+			 			
+			 			setTimeout(function(){
+			 				core.loadCategories($that.attr('group_id'));
+			 			}, 2000);
+			 					
 			 		});	
 			 	}
 				,addToGroup: function(){
@@ -1258,7 +1271,7 @@ _.extend(core, {
 					  toggle: true
 			});
 			
-			$('.category').live('click', function(event) {
+			$('.category').click(function(event) {	
 				
 				$('#thumb-collection').show();
 				

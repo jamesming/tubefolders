@@ -2,7 +2,7 @@
 
 class Models_Db_Assets_Model extends Database {
 	
-	public function getAll(){
+	public function getAll($group_id){
 		
 
 		$this->upload = new Models_Up_Assets_Model;
@@ -26,7 +26,7 @@ class Models_Db_Assets_Model extends Database {
 						, assets.duration as duration
 						, assets.name as asset_name '   
 					,$where_array = array(
-						'groups_categories.group_id' => 4
+						'groups_categories.group_id' => $group_id
 					)
 					,$use_order = TRUE
 					,$order_field = 'categories.order asc, assets.order asc'

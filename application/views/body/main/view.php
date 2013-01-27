@@ -27,6 +27,13 @@
 
 				
 			</style>
+			<h4   class='groups '  group_id='3' >
+				<div>Unsorted</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>					
+				</div>
+			</h4>			
 			<h4   class='groups '  group_id='4' >
 				<div>Pop</div>
 				<div>
@@ -48,14 +55,28 @@
 					<div  class='move ' ></div>
 				</div>
 			</h4>
-			<h4   class='groups '  group_id='3' >
-				<div>Unsorted</div>
+
+			<h4   class='groups '  group_id='5' >
+				<div>TV</div>
 				<div>
 					<div  class='copy ' ></div>
 					<div  class='move ' ></div>					
 				</div>
 			</h4>
-		
+			<h4   class='groups '  group_id='6' >
+				<div>Tech</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>					
+				</div>
+			</h4>				
+			<h4   class='groups '  group_id='7' >
+				<div>Oldies</div>
+				<div>
+					<div  class='copy ' ></div>
+					<div  class='move ' ></div>					
+				</div>
+			</h4>	
 	</div>      	
 	<div class="span2">
 		<div   id='categories' class="accordion" >
