@@ -794,6 +794,7 @@ _.extend(core, {
 					this.playAsset();
 					this.dragAsset();
 					this.formSubmission.init();
+					this.addToGroup();
 					
 				}
 				
@@ -1191,6 +1192,10 @@ _.extend(core, {
 						}
 
 					}
+				}
+				
+				,addToGroup: function(){
+					
 				}
 				
 			}
