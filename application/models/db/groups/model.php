@@ -22,17 +22,47 @@ class Models_Db_Groups_Model extends Database {
 		
 	}
 	
-	public function insertGroup($post_array){
-		return $this->insert_table(
-			$table = 'groups', 
-			$insert_what = array(
-				   'category_id' => $post_array['category_id']
-				  ,'group_id' =>  $post_array['group_id']
+	
+	public function checkGroupCategoryJoin($post_array){
+		return $this->check_if_exist( 
+			 $table = 'groups_categories	'
+			,$where_array = array(
+				 'category_id' => $post_array['category_id']
+				,'group_id' =>  $post_array['group_id']
 			)
 		);
 		
+	}	
+	
+	
+	public function insertCategoryIntoGroup($post_array){
+		if( !$this->checkGroupCategoryJoin($post_array)){
+			return $this->insert_table(
+				$table = 'groups_categories	', 
+				$insert_what = array(
+					   'category_id' => $post_array['category_id']
+					  ,'group_id' =>  $post_array['group_id']
+				)
+			);			
+		}else{
+			return 0;	
+		};
 	}
 	
+	
+	
+	public function removeCategoryFromGroup($post_array){
+		 delete_from_table(
+		 	  $table = 'groups_categories	'
+		 	, $where_array = array(
+				 'category_id' => $post_array['category_id']
+				,'group_id' =>  $post_array['group_id']
+			)
+		 	
+		 );
+	}
+	
+
 
 
 }

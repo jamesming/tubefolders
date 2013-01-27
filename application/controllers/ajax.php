@@ -9,6 +9,8 @@ class Ajax extends CI_Controller {
 		$this->assets_model = new Models_Db_Assets_Model;
 		
 		$this->categories_model = new Models_Db_Categories_Model;
+		
+		$this->groups_model = new Models_Db_Groups_Model;
 	}
 	
 	function getAll(){
@@ -147,6 +149,21 @@ class Ajax extends CI_Controller {
  	
  	public function testPostToIframe(){
  		echo "testing this thing";
+ 	}
+ 	
+ 	
+ 	public function moveCategoryIntoGroup(){
+ 		
+ 		$post_array = $this->input->post(); 
+ 		
+ 		$this->groups_model->insertCategoryIntoGroup($post_array);		
+ 		
+ 		$this->groups_model->removeCategoryFromGroup($post_array);
+ 	}
+ 	
+ 	public function copyCategoryIntoGroup(){
+ 		
+ 		echo $this->groups_model->insertCategoryIntoGroup($this->input->post());		
  		
  	}
 }

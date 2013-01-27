@@ -177,10 +177,6 @@ class Models_Db_Assets_Model extends Database {
 		
 		$dir_path = 'uploads/'  .  $post_array['id'] . '/';
 		
-		$this->upload = new Models_Up_Assets_Model;
-		
-		$this->upload->recursiveDelete($dir_path);
-		
 		$this->delete_from_table(
 			$table = 'assets', 
 			$where_array = $post_array

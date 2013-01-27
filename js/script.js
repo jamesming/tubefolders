@@ -1201,9 +1201,36 @@ _.extend(core, {
 							hoverClass: "ui-state-highlight",
 							tolerance: "pointer",
 							drop: function( event, ui ) {
-								console.log($(this).attr('group_id'));
-								console.log(ui.draggable.attr('category_id'));
 								
+								postObj = {
+									 group_id: $(this).attr('group_id')
+									,category_id: ui.draggable.attr('category_id')
+								};
+								
+								$.post(	window.base_url  + 'index.php/ajax/copyCategoryIntoGroup',
+										postObj,
+										function( data) {
+											
+											console.log(data);
+											
+										}
+								);									
+								
+								return;
+								
+								
+								if (confirm('Is this a move?')) {  // MOVE
+
+
+
+
+								} else {  // COPY
+								    
+								    
+								    
+								    
+								    
+								}
 							}
 						});
 				}
