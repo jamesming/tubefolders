@@ -668,18 +668,24 @@ _.extend(core, {
 							tolerance: "pointer",
 							drop: function( event, ui ) {
 								
-								var postObj = {
-									 group_id: $(this).parent().parent().attr('group_id')
-									,category_id: ui.draggable.attr('category_id')
-								};
+								var group_id = $(this).parent().parent().attr('group_id');
 								
-								$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
-										postObj,
-										function( data) {
-											ui.draggable.remove();
-										}
-								);									
-								
+								if( core.select_group_id != group_id){
+									var postObj = {
+										 group_id: $(this).parent().parent().attr('group_id')
+										,category_id: ui.draggable.attr('category_id')
+									};
+									
+									$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
+											postObj,
+											function( data) {
+												
+											}
+									);										
+									
+								}else{
+									alert('already moved to '+group_id);	
+								}
 
 							}
 						});
@@ -692,30 +698,40 @@ _.extend(core, {
 							tolerance: "pointer",
 							drop: function( event, ui ) {
 								
-								var postObj = {
-									 group_id: $(this).parent().parent().attr('group_id')
-									,category_id: ui.draggable.attr('category_id')
-								};								
+								var group_id = $(this).parent().parent().attr('group_id');
 								
-								$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
-										postObj,
-										function( data) {
-											ui.draggable.remove();
-										}
-								);
+								if( core.select_group_id != group_id){
 								
-								postObj = {
-									 group_id: core.select_group_id
-									,category_id: ui.draggable.attr('category_id')
-								};	
+										var postObj = {
+											 group_id: $(this).parent().parent().attr('group_id')
+											,category_id: ui.draggable.attr('category_id')
+										};								
+										
+										$.post(	window.base_url  + 'index.php/ajax/insertCategoryIntoGroup',
+												postObj,
+												function( data) {
+													ui.draggable.remove();
+												}
+										);
+										
+										postObj = {
+											 group_id: core.select_group_id
+											,category_id: ui.draggable.attr('category_id')
+										};	
+										
+										$.post(	window.base_url  + 'index.php/ajax/removeCategoryFromGroup',
+												postObj,
+												function( data) {
+													console.log(data);
+													ui.draggable.remove();
+												}
+										);											
+										
+								}else{
+									alert('already moved to '+group_id);	
+								}
 								
-								$.post(	window.base_url  + 'index.php/ajax/removeCategoryFromGroup',
-										postObj,
-										function( data) {
-											console.log(data);
-											ui.draggable.remove();
-										}
-								);																								
+																							
 								
 								
 							}
